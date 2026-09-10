@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pydantic-settings
+pymongo
+httpx
+prometheus-client
+structlog
+pymupdf
+qdrant-client
+mcp
+streamlit
+pytest
+pytest-asyncio
+ruff
+mypy
