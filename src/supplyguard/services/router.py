@@ -75,10 +75,21 @@ async def classify_with_llm(question: str, ollama) -> tuple[Intent, str]:
         # LLM output proposes a route; deterministic eligibility decides whether
         # that route may access a database or tool.
         if predicted == Intent.ANALYTICS and not analytics_eligible(q):
-            return Intent.UNSUPPORTED, "ollama_guardrail"
+            corrected = (
+                Intent.DOCUMENT
+                if any(term in q for term in DOCUMENT_DOMAINS)
+                else Intent.UNSUPPORTED
+            )
+            return corrected, "ollama_guardrail"
         if predicted == Intent.LIVE_RISK:
-            return (Intent.ANALYTICS if analytics_eligible(q) else Intent.UNSUPPORTED,
-                    "ollama_guardrail")
+            if analytics_eligible(q):
+                return Intent.ANALYTICS, "ollama_guardrail"
+            corrected = (
+                Intent.DOCUMENT
+                if any(term in q for term in DOCUMENT_DOMAINS)
+                else Intent.UNSUPPORTED
+            )
+            return corrected, "ollama_guardrail"
         if predicted == Intent.UNSUPPORTED and analytics_eligible(q):
             return Intent.ANALYTICS, "ollama_guardrail"
         if predicted == Intent.UNSUPPORTED and any(term in q for term in DOCUMENT_DOMAINS):
