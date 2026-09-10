@@ -13,6 +13,7 @@ The assessment asks for a small dataset and a lightweight application. I intenti
 ## Submission artifacts
 
 - `docs/SupplyGuard_AI_Architecture.drawio` is the editable end-to-end architecture and flow diagram.
+- `docs/SupplyGuard_AI_Architecture.png` is the high-resolution submission-ready diagram export.
 - `output/submission/SupplyGuard_AI_Assessment_Submission.pdf` is the reviewer-ready submission report.
 - `output/submission/SupplyGuard_AI_Assessment_Submission.docx` is the editable version of the report.
 
