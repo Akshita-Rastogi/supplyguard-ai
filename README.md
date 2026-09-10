@@ -10,6 +10,12 @@ I chose a procurement and supply-chain risk use case because it exercises all th
 
 The assessment asks for a small dataset and a lightweight application. I intentionally used a larger public corpus to demonstrate that the same simple design still works with long documents, tables, figures, acronyms, blank pages and more than 70,000 CSV rows. The application remains local and does not require cloud deployment, fine-tuning or a paid API.
 
+## Submission artifacts
+
+- `docs/SupplyGuard_AI_Architecture.drawio` is the editable end-to-end architecture and flow diagram.
+- `output/submission/SupplyGuard_AI_Assessment_Submission.pdf` is the reviewer-ready submission report.
+- `output/submission/SupplyGuard_AI_Assessment_Submission.docx` is the editable version of the report.
+
 ## What is included
 
 | Assessment capability | Implementation |
