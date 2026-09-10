@@ -12,9 +12,18 @@ async def answer_analytics(db, tenant_id: str, question: str) -> tuple[str, list
     if not analytics_eligible(q):
         # Defense in depth: a future caller cannot accidentally execute the
         # default aggregation for unrelated text even if routing regresses.
-        return ("I don't know based on the available evidence. This question is outside the "
-                "supported FEMA analytics operations.", [{"tool": "mongodb_aggregate",
-                "status": "not_executed", "reason": "ineligible_question", "rows": 0}])
+        return (
+            "I don't know based on the available evidence. This question is outside the "
+            "supported FEMA analytics operations.",
+            [
+                {
+                    "tool": "mongodb_aggregate",
+                    "status": "not_executed",
+                    "reason": "ineligible_question",
+                    "rows": 0,
+                }
+            ],
+        )
     group = next((field for word, field in GROUP_FIELDS.items() if word in q), None)
     year_match = re.search(r"\b(19|20)\d{2}\b", q)
     match = {"tenant_id": tenant_id, "record_type": "fema_declaration"}
