@@ -12,9 +12,14 @@ async def answer_analytics(db, tenant_id: str, question: str) -> tuple[str, list
     if not analytics_eligible(q):
         # Defense in depth: a future caller cannot accidentally execute the
         # default aggregation for unrelated text even if routing regresses.
+        refusal = " ".join(
+            (
+                "I don't know based on the available evidence. This question is outside the",
+                "supported FEMA analytics operations.",
+            )
+        )
         return (
-            "I don't know based on the available evidence. This question is outside the "
-            "supported FEMA analytics operations.",
+            refusal,
             [
                 {
                     "tool": "mongodb_aggregate",
